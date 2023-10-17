@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+
+        <record id = 'show_patient_logs' model = 'ir.actions.act_window'>
+            <field name ='name'>Patients Log</field>
+            <field name="res_model">hms.patientlog</field>
+        </record>
+
+        <record id = 'patient_logs_form' model = 'ir.ui.view'>
+            <field name ='name'>Patients Data</field>
+            <field name="model">hms.patientlog</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Logs">
+                            <field name="patient_id"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id = 'patient_logs_tree' model = 'ir.ui.view'>
+            <field name ='name'>Patients Data</field>
+            <field name="model">hms.patientlog</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date"/>
+                    <field name="create_uid"/>
+                    <field name="patient_id"/>
+                    <field name="description"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id='patients_logs_menu' name='Patients_Logs'/>
+        <menuitem id='patients_logs' name='Info' 
+        parent='patients_logs_menu' action="show_patient_logs"/>
+    </data>
+</odoo>

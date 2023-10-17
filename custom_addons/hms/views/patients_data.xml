@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <record id = 'show_patient_data' model = 'ir.actions.act_window'>
+            <field name ='name'>Patients Data</field>
+            <field name="res_model">hms.patient</field>
+        </record>
+
+        <record id = 'patient_data_form' model = 'ir.ui.view'>
+            <field name ='name'>Patients Data</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="status" widget="statusbar" nolabel="1" options="{'clickable':'1'}"/>
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="Personal Info">
+                                <group string="Personal Info">
+                                    <field name="fname"/>
+                                    <field name="lname"/>
+                                    <field name="birthdate"/>
+                                </group>
+                                <group string="Additional Info">
+                                    <field name="image"/>
+                                    <field name="address"/>
+                                    <field name="age"/>
+                                    <field name="email"/>
+                                </group>
+                            </page>
+                            <page string="Medical Info">
+                                <group string="Medical Status">
+                                    <field name="history" attrs="{'invisible': [('age','&lt;=',50)]}"/>
+                                    <field name="blood_type"/>
+                                    <field name="pcr"/>
+                                    <field name="cr_ratio" attrs="{'required':[('pcr','=',True)]}"/>
+                                </group>
+                                <group string="Supervision Info Info">
+                                    <field name="dept_id" domain = "[('is_open' ,'=' , True)]"/>
+                                    <field name="dept_capacity"/>
+                                    <field name="doctors" groups="hms.hms_managers_group" attrs="{'readonly' : [('dept_id','=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id = 'patient_data_tree' model = 'ir.ui.view'>
+            <field name ='name'>Patients Data</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                        <field name="fname"/>
+                        <field name="lname"/>
+                        <field name="age"/>
+                        <field name="blood_type"/>
+                        <field name="status"/>
+                        <field name="dept_id" domain = "[('is_open' ,'=' , True)]"/>
+                        <field name="dept_capacity"/>
+                        <field name="doctors"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id='patients_menu' name='Patients'/>
+        <menuitem id='patients_data' name='Info' 
+        parent='patients_menu' action="show_patient_data"/>
+    </data>
+</odoo>

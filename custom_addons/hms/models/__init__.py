@@ -1,0 +1,1 @@
+from . import patient, patientlog, department, doctor, customer

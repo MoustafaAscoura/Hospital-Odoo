@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record id = 'show_department_data' model = 'ir.actions.act_window'>
+            <field name ='name'>Departments Information</field>
+            <field name="res_model">hms.department</field>
+        </record>
+
+
+        <record id = 'department_data_form' model = 'ir.ui.view'>
+            <field name ='name'>Departments Information</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Department Info">
+                            <field name="name"/>
+                            <field name="capacity"/>
+                            <field name="is_open"/>
+                            <field name="patients"/>
+                            <field name="doctors"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id = 'department_data_tree' model = 'ir.ui.view'>
+            <field name ='name'>Departments Information</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="is_open"/>
+                    <field name="patients"/>
+                    <field name="doctors"/>
+                </tree>
+            </field>
+        </record>
+
+
+        
+        <menuitem id='departments_menu' name='Departments'/>
+        <menuitem id='departments_data' name='info' 
+        parent='departments_menu' action="show_department_data"/>
+    </data>
+</odoo>
